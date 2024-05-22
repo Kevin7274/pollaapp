@@ -4,10 +4,10 @@
 
 {% block content %}
 
-<h1>Wolcome home! 🗿 </h1>
+<h1>Wolcome a las encuestas 🗿 </h1>
 <h2>Responde alguna de las siguientes:</h2>
 <ul>
-    <h3>Encuestas</h3>
+    <h3>Encuestas👇:</h3>
     {% for q in questions %}
     <li><a href="{% url 'polls:vote' q.id %}" >{{ q.question_text }}</a></li>
     {% endfor %}
