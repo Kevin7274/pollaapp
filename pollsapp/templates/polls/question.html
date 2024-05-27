@@ -1,5 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}Vota{% endblock %}
+
+{% block content %}
 <h1>{{ question }}</h1>
+{% if error_message %}
+<div class="alert">
+    <p>{{ error_message }}</p>
+</div>
+{% endif %}
+
 <form method="post">
+
     {% csrf_token %}
     {% for c in question.choice_set.all %}
 
@@ -13,4 +25,6 @@
     {% endfor %}
     <input type="submit" value="votar :D">
 </form>
+
+{% endblock %}
 
