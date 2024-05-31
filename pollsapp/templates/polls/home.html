@@ -4,12 +4,16 @@
 
 {% block content %}
 
-<h1>Wolcome a las encuestas 🗿 </h1>
+<h1>Welcome a las encuestas 🗿 </h1>
 <h2>Responde alguna de las siguientes:</h2>
 <ul>
     <h3>Encuestas👇:</h3>
     {% for q in questions %}
-    <li><a href="{% url 'polls:vote' q.id %}" >{{ q.question_text }}</a></li>
+  
+    <li>
+        <a href="{% url 'polls:vote' q.id %}"  type="submit">{{ q.question_text }}</a>
+        <button type="button" onclick="location.href='{% url 'polls:results' q.id %}'" class="your-class-name"> Mostrar Resultados </button>
+    </li>
     {% endfor %}
 </ul>
 {% endblock %}

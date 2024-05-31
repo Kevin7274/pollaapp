@@ -6,6 +6,8 @@
 
 <h1>{{ question }}</h1>
 
+
+
 <ul>
     {% for c in question.choice_set.all %}
     <li>{{ c.choice_text }} --> {{ c.votes }}</li>
@@ -13,5 +15,59 @@
 </ul>
 <hr>
 <a href="{% url 'polls:home' %}">Inicio</a>
+<style>
+    /* Add some basic styling to the chart container */
+   .chart-container {
+        width: 80%; /* adjust the width to your liking */
+        margin: 40px auto; /* center the chart horizontally */
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+</style>
+
+<div class="chart-container">
+    <canvas id="myChart"></canvas>
+</div>
+
+<script>
+    var labels = {{ labels|safe }};
+    var data = {{ data|safe }};
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Votos',
+                data: data,
+                backgroundColor: [
+                'rgba(102, 255, 153, 0.2)',
+                'rgba(255, 153, 102, 0.2)',
+                'rgba(102, 153, 255, 0.2)',
+                'rgba(255, 215, 102, 0.2)',
+                'rgba(153, 102, 102, 0.2)'
+                ],
+                borderColor: [
+                'rgba(102, 255, 102, 1)',
+                'rgba(255, 102, 102, 1)',
+                'rgba(102, 102, 255, 1)',
+                'rgba(255, 255, 102, 1)',
+                'rgba(153, 153, 102, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            title: {
+                display: true,
+                text: 'Resultados de la votación'
+            },
+
+            aspectRatio: 1
+        }
+    });
+</script>
 
 {% endblock %}
